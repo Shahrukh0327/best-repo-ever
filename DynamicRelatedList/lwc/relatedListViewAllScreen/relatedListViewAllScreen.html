@@ -1,0 +1,45 @@
+<template>
+  <template if:true={dataIsPresent}>
+    <div class="slds-card slds-card_boundary slds-grid slds-grid_vertical forceListViewManager">
+      <div class="slds-page-header forceListViewManagerHeader">
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-title">
+            <div class="slds-media">
+              <lightning-icon icon-name={iconName} size="small" class="slds-m-right_small"></lightning-icon>
+              <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate">{title}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-meta">
+            <p class="slds-text-body--small slds-m-top_medium">
+              <span>{data.length} {recordCountLabel}</span>
+              <span> • </span>
+              <span>Updated </span>
+              <lightning-relative-date-time value={lastUpdated}></lightning-relative-date-time>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="forceListViewManagerGrid slds-theme_shade">
+        <lightning-datatable key-field="id" hide-checkbox-column show-row-number-column data={data} columns={columns}>
+        </lightning-datatable>
+      </div>
+    </div>
+  </template>
+  <template if:false={dataIsPresent}>
+    <lightning-card>
+      <c-illustration
+        heading="There's nothing here"
+        message-body="There are no records to display here at the moment."
+        image-name="custom:fishing_deals"
+        image-size="large"
+      ></c-illustration>
+      <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large"></lightning-spinner>
+      </template>
+    </lightning-card>
+  </template>
+</template>

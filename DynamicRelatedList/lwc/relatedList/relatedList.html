@@ -1,0 +1,37 @@
+<template>
+  <template if:true={dataIsPresent}>
+    <div class="slds-card slds-card_boundary slds-grid slds-grid_vertical forceListViewManager">
+      <div class="slds-page-header forceListViewManagerHeader">
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-title">
+            <div class="slds-media">
+              <lightning-icon icon-name={iconName} size="small" class="slds-m-right_small"></lightning-icon>
+              <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate">{title}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-meta">
+            <p class="slds-text-body--small slds-m-top_medium">
+              <span>{recordCountLabel}</span>
+              <span> • </span>
+              <span>Updated </span>
+              <lightning-relative-date-time value={lastUpdated}></lightning-relative-date-time>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="forceListViewManagerGrid slds-theme_shade">
+        <lightning-datatable key-field="id" hide-checkbox-column show-row-number-column data={data} columns={columns}>
+        </lightning-datatable>
+      </div>
+      <template if:true={dataIsPresent}>
+        <footer class="slds-card__footer">
+          <a class="slds-card__footer-action" onclick={handleViewAll}>View All</a>
+        </footer>
+      </template>
+    </div>
+  </template>
+</template>
